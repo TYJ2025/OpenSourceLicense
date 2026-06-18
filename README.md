@@ -42,10 +42,20 @@ xdg-open index.html    # Linux
 **啟用步驟**：Repo → **Settings → Pages → Build and deployment → Source** 選「**GitHub Actions**」。
 之後每次推送 `main` 即自動更新；也可在 Actions 頁手動觸發。
 
+## 講座模式（90 分鐘投影片）
+
+`lecture.html` 是獨立的**簡報式講座頁**，以**真實踩雷案例開場**凝聚注意力，並新增
+**「AI 時代的開源應用（Claude / Copilot / RAG / MCP）」**一段。
+
+- 操作：`→` / 空白鍵下一頁、`←` 上一頁、`O` 總覽、`T` 簡報計時器、`F` 全螢幕、點畫面左右切換。
+- 大綱另見 `docs/講座大綱-90分鐘.md`。
+
 ## 檔案結構
 
 ```
-index.html                          # 互動網站（單檔，含所有圖表、互動與列印樣式）
+index.html                          # 自學互動網站（單檔，含所有圖表、互動與列印樣式）
+lecture.html                        # 90 分鐘講座投影片（獨立頁，鍵盤操作 + 計時器）
+docs/講座大綱-90分鐘.md              # 講座大綱與講者備忘
 docs/版面架構與視覺設計藍圖.md        # 每個區塊的視覺/互動設計說明（設計藍圖）
 .github/workflows/deploy-pages.yml   # GitHub Pages 自動部署
 README.md
