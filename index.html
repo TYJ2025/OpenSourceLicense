@@ -176,6 +176,51 @@ footer{padding:40px 0 60px;color:var(--dim);font-size:13px;border-top:1px solid 
   .aitem{grid-template-columns:64px 1fr;}.aitem .md{display:none}
 }
 @media(max-width:560px){.dash{grid-template-columns:1fr}}
+
+/* ============================================================
+   列印 / PDF 友善樣式（適合當作講義發放）
+   - 白底深字、攤平漸層、保留風險語意配色
+   - 自動展開可摺疊內容、避免卡片跨頁裂開
+   ============================================================ */
+.print-only{display:none}
+@media print{
+  @page{margin:14mm}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact;box-shadow:none !important}
+  /* 重新定義調色盤為淺色 */
+  :root{--txt:#10162e;--muted:#46506e;--dim:#5c668a;--line:#cfd6e8}
+  html,body{background:#fff !important;color:#10162e !important}
+  h1,h2,h3,h4{color:#10162e !important}
+  .muted,.dim,.sec-sub,.lead,.kpi .sub,.aitem .ti span,.aitem .md{color:#46506e !important}
+  a{color:#1457b8 !important}
+  /* 隱藏導覽與互動專用控制項 */
+  header.nav,nav,.note-toggle,.btn-reset,#reTree,.opts button{display:none}
+  /* 將深色容器全部轉白 */
+  .card,.chart-card,.cmp .row,.flow .node,.dtree,.mrow,.check label,
+  .aitem,.note,.gap-box,.callout,.verdict,.heat-wrap,.tabs,.bar,
+  .path .step,.kbd,.chip{background:#fff !important;border-color:#cfd6e8 !important}
+  .hero{padding-top:8px}
+  .hero h1{font-size:30px}
+  .hero h1 .hl{-webkit-text-fill-color:#3a2fb0;color:#3a2fb0 !important;background:none}
+  section{border-top:1px solid #d7dcea !important;padding:18px 0}
+  /* 保留語意風險色（白底上仍清楚） */
+  .flow .node.danger{background:#fff !important;border-color:var(--red) !important}
+  .chip{color:#46506e !important}
+  .chip.bad{color:#a01530 !important;border-color:#e3a6b4 !important}
+  .chip.warn{color:#8a5a00 !important;border-color:#e6c98a !important}
+  .chip.ok{color:#0a6b50 !important;border-color:#9bd3bf !important}
+  .callout b[style]{color:#a01530 !important}
+  /* 避免重要區塊跨頁裂開 */
+  .card,.chart-card,.flow .node,.aitem,.tl .item,.note,.mrow,
+  .cmp .row,.verdict,.callout,.gap-box,.sec-h{break-inside:avoid}
+  /* 講義版：強制展開講者備忘 + 同時顯示雷達與義務清單 */
+  .notes{display:block !important}
+  #cmp-radar{display:grid !important}
+  #cmp-list{display:block !important}
+  /* 每個主要章節獨立成頁，方便裝訂 */
+  #compare,#trigger,#heat,#ai,#tree,#defense,#cases,#lecture{break-before:page}
+  /* 列印專用提示 */
+  .print-only{display:block;font-size:11px;color:#5c668a;margin-top:6px}
+}
 </style>
 </head>
 <body>
@@ -207,6 +252,7 @@ footer{padding:40px 0 60px;color:var(--dim);font-size:13px;border-top:1px solid 
     </div>
     <h1>當一行 AI 生成的程式碼，<br><span class="hl">逼你的核心金融系統開源</span></h1>
     <p class="lead">AGPL 的「網路互動條款（Network Interaction, §13）」專門針對伺服器端與雲端服務而設計——而這正是金融系統的主場。本互動儀表板把法律條文轉成你看得懂、點得動的風險地圖。</p>
+    <div style="margin-top:14px"><button onclick="window.print()" style="font:inherit;font-size:14px;font-weight:700;cursor:pointer;border:0;border-radius:11px;padding:11px 20px;color:#06122a;background:linear-gradient(90deg,var(--accent),var(--accent2))">🖨️ 列印 / 存成 PDF 講義</button></div>
   </div>
 </div>
 
@@ -433,6 +479,7 @@ footer{padding:40px 0 60px;color:var(--dim);font-size:13px;border-top:1px solid 
   <div class="wrap">
     <p><b>AGPL RiskLab</b> · 金融資訊人員 AGPL 授權風險與防範互動學習網站</p>
     <p class="dim">本網站為法遵與資安「教育用途」設計，內容為一般性風險說明，不構成正式法律意見。實際授權判斷請就具體架構與授權版本諮詢專業法務。 ｜ 鍵盤：按 <span class="kbd">G</span> 重置決策樹。</p>
+    <p class="print-only">本頁為列印／PDF 講義版本——可摺疊的講者備忘已自動展開，風險語意配色已保留。內容僅供教育用途，不構成正式法律意見。</p>
   </div>
 </footer>
 

@@ -30,11 +30,24 @@ xdg-open index.html    # Linux
 8. **案例時間軸** — AGPLv3、MongoDB、Grafana 等授權變更殷鑑
 9. **講座模式** — 兩小時議程表 + 可摺疊講者備忘稿
 
+## 列印 / PDF 講義
+
+點首頁的「🖨️ 列印 / 存成 PDF 講義」按鈕（或瀏覽器列印），即可輸出**列印友善版本**：
+白底深字、攤平漸層但保留風險語意配色、自動展開講者備忘、各章節獨立成頁方便裝訂。
+
+## 線上部署（GitHub Pages）
+
+本專案附帶 `.github/workflows/deploy-pages.yml`，合併到 `main` 後會自動部署到 GitHub Pages。
+
+**啟用步驟**：Repo → **Settings → Pages → Build and deployment → Source** 選「**GitHub Actions**」。
+之後每次推送 `main` 即自動更新；也可在 Actions 頁手動觸發。
+
 ## 檔案結構
 
 ```
-index.html                          # 互動網站（單檔，含所有圖表與互動）
+index.html                          # 互動網站（單檔，含所有圖表、互動與列印樣式）
 docs/版面架構與視覺設計藍圖.md        # 每個區塊的視覺/互動設計說明（設計藍圖）
+.github/workflows/deploy-pages.yml   # GitHub Pages 自動部署
 README.md
 ```
 

@@ -1,0 +1,43 @@
+name: Deploy to GitHub Pages
+
+# 部署互動學習網站到 GitHub Pages。
+# 啟用方式：Repo → Settings → Pages → Build and deployment → Source 選「GitHub Actions」。
+# 合併到 main 後會自動部署；也可在 Actions 頁手動觸發 (workflow_dispatch)。
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同時只跑一個部署，新的會取消進行中的舊部署
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # 整個 repo 根目錄即為靜態網站（index.html 在根目錄）
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
